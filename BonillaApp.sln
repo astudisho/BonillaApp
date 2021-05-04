@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BonillaApp", "BonillaApp\BonillaApp.csproj", "{34A66507-D2A7-4249-9E43-C356A038D666}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34A66507-D2A7-4249-9E43-C356A038D666}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A66507-D2A7-4249-9E43-C356A038D666}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A66507-D2A7-4249-9E43-C356A038D666}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A66507-D2A7-4249-9E43-C356A038D666}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F713D602-DC91-4772-8E38-A312566D6EDA}
+	EndGlobalSection
+EndGlobal
