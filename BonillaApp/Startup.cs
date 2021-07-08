@@ -12,6 +12,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using MySql.EntityFrameworkCore.Extensions;
+using BonillaApp.Data.Context;
+using Microsoft.EntityFrameworkCore;
+using BonillaApp.Data.Repository;
+using BonillaApp.Mapper;
+using BonillaApp.Bussines;
+
 namespace BonillaApp
 {
     public class Startup
@@ -32,10 +39,31 @@ namespace BonillaApp
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Energia Eficiente", Version = "v1" });
             });
+
+            //services.AddEntityFrameworkMySQL()
+            //    .AddDbContext<MonitorContext>(options => 
+            //    {
+            //        //options.UseMySQL("server=a2nlmysql39plsk.secureserver.net;uid=innovus1;database=energia_eficiente;pwd=Guadalajara1*;persistsecurityinfo=True"); 
+            //        options.UseMySQL("server=mysql;uid=root;database=energia_eficiente;pwd=Guadalajara1*");
+            //    });
+            services.AddDbContext<MonitorContext>(options =>
+            {
+                //options.UseMySQL("server=a2nlmysql39plsk.secureserver.net;uid=innovus1;database=energia_eficiente;pwd=Guadalajara1*");
+                options.UseMySQL("server=mysql;uid=root;database=energia_eficiente;pwd=Guadalajara1*");
+
+            }, ServiceLifetime.Scoped);
+
+            services.AddAutoMapper(x => x.AddProfile(typeof(DefaultProfile)));
+
+            // Dependency injection.
+            services.AddScoped<VoltajeRepository>();
+            services.AddScoped<DeviceRepository>();
+            services.AddScoped<VoltajeService>();
+            services.AddScoped<DeviceService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, MonitorContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +82,14 @@ namespace BonillaApp
             {
                 endpoints.MapControllers();
             });
+
+            // Ensure context is created.
+            var pendingMigrations = dbContext.Database.GetPendingMigrations().Any();
+
+            if (pendingMigrations)
+            {
+                await dbContext.Database.MigrateAsync();
+            }
         }
     }
 }
