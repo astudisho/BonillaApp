@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonillaApp.Migrations
 {
     [DbContext(typeof(MonitorContext))]
-    [Migration("20210708023716_Initial")]
-    partial class Initial
+    [Migration("20210713014900_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,7 +39,7 @@ namespace BonillaApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DeviceId")
+                    b.Property<int>("DeviceId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InsertedAt")
@@ -52,8 +52,8 @@ namespace BonillaApp.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("varbinary(4000)");
 
-                    b.Property<int>("Voltaje")
-                        .HasColumnType("int");
+                    b.Property<float>("Voltaje")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -66,7 +66,9 @@ namespace BonillaApp.Migrations
                 {
                     b.HasOne("BonillaApp.Data.Models.DeviceDbo", "Device")
                         .WithMany("Voltajes")
-                        .HasForeignKey("DeviceId");
+                        .HasForeignKey("DeviceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Device");
                 });

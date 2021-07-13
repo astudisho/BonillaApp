@@ -49,7 +49,8 @@ namespace BonillaApp
             services.AddDbContext<MonitorContext>(options =>
             {
                 //options.UseMySQL("server=a2nlmysql39plsk.secureserver.net;uid=innovus1;database=energia_eficiente;pwd=Guadalajara1*");
-                options.UseMySQL("server=mysql;uid=root;database=energia_eficiente;pwd=Guadalajara1*");
+                options.UseMySQL("server=162.241.62.160;uid=innovus1_monitor;database=innovus1_monitor;pwd=Guadalajara1*");
+                //options.UseMySQL("server=mysql;uid=root;database=energia_eficiente;pwd=Guadalajara1*");
 
             }, ServiceLifetime.Scoped);
 
